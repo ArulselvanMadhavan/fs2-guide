@@ -23,13 +23,13 @@ object Level5Tests {
         test("using the scanChunksOpt") { () =>
           assertEqual(
             (Stream(10, 20) ++ Stream(30, 40)).through(takeS(3)).toList,
-            List(???)
+            List(10, 20, 30)
           )
         },
         test("using the Pull") { () =>
           assertEqual(
             (Stream(10, 20) ++ Stream(30, 40)).through(takeP(3)).toList,
-            List(???)
+            List(10, 20, 30)
           )
         }
       )

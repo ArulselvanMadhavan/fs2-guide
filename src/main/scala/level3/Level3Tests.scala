@@ -39,7 +39,7 @@ object Level3Tests {
 
         assertEqual(
           importantResource.get(),
-          ???
+          "released"
         )
       }
     )

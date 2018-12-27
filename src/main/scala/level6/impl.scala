@@ -48,6 +48,6 @@ object impl {
         case None => Pull.done
       }
     }
-    Stream(z) ++ go(s, z).stream
+    go(s, z).stream.cons1(z)
   }
 }

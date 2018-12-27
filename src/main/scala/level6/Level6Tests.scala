@@ -27,7 +27,8 @@ object Level6Tests {
           )
         },
         test(">3") { () =>
-          val s1 = Stream.range(0, 5) ++ Stream(throw new RuntimeException("Oops!"))
+          val s1 = Stream.range(0, 5) ++ Stream(
+            throw new RuntimeException("Oops!"))
 
           assertEqual(
             takeWhile(s1)(_ > 3).toList,

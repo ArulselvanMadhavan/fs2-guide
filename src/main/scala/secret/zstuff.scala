@@ -11,7 +11,8 @@ import testz._
   */
 object zstuff {
   private[this] val printer: (Result, List[String]) => Unit =
-    (result, name) => println(s"${name.reverse.mkString("[", " - ", "]:")} $result")
+    (result, name) =>
+      println(s"${name.reverse.mkString("[", " - ", "]:")} $result")
 
   private[this] val pureHarness: Harness[PureHarness.Uses[Unit]] =
     PureHarness.makeFromPrinter(printer)

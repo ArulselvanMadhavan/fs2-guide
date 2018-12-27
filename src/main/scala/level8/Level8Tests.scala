@@ -34,10 +34,11 @@ object Level8Tests {
           var cache = ' '
 
           val s0 = Stream("some", "random", "text").covary[IO]
-          val s1 = evalMapAccumulate(s0)(0)((acc, s) => IO {
+          val s1 = evalMapAccumulate(s0)(0)((acc, s) =>
+            IO {
               cache = s.head
               (acc + s.length, s.head)
-            })
+          })
 
           combine(
             assertEqual(

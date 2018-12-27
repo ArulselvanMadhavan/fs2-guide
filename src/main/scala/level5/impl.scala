@@ -8,12 +8,15 @@ object impl {
     * Emits the first `n` elements of this stream
     */
   def takeS[F[_], O](n: Long): Pipe[F, O, O] =
-    in => in.scanChunksOpt(n) { n =>
-      if (n <= 0) None
-      else Some(c => c.size match {
-        case m if m < n => (n - m, c)
-        case m => (0, c.take(n.toInt))
-      })
+    in =>
+      in.scanChunksOpt(n) { n =>
+        if (n <= 0) None
+        else
+          Some(c =>
+            c.size match {
+              case m if m < n => (n - m, c)
+              case m          => (0, c.take(n.toInt))
+          })
     }
 
   /**
@@ -33,6 +36,7 @@ object impl {
       }
     }
 
-    in => go(in, n).stream
+    in =>
+      go(in, n).stream
   }
 }

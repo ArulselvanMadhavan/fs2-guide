@@ -2,10 +2,10 @@ name := "fs2-guide"
 
 version := "0.1"
 
-scalaVersion := "2.12.6"
+scalaVersion := "2.12.7"
 
 val testZv = "0.0.5"
-val fs2v = "1.0.0"
+val fs2v = "1.0.1"
 
 libraryDependencies ++= Seq(
   "org.scalaz" %% "testz-core" % testZv,

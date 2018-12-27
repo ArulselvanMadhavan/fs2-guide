@@ -28,45 +28,46 @@ object Level1Tests {
       },
       test("++") { () =>
         assertEqual(
-          (Stream.emit(10) ++ Stream(20, 30, 40) ++ Stream.emits(Vector(50, 60))).toVector,
-          ??? // fix me and others
+          (Stream.emit(10) ++ Stream(20, 30, 40) ++ Stream.emits(
+            Vector(50, 60))).toVector,
+          Vector(10, 20, 30, 40, 50, 60)
         )
       },
       test("map") { () =>
         assertEqual(
           Stream(1, 2, 3).map(_.toString).toList,
-          ???
+          List("1", "2", "3")
         )
       },
       test("fold") { () =>
         assertEqual(
           Stream.range(1, 5).fold(0)(_ + _).toList,
-          ???
+          List(4 + 3 + 2 + 1)
         )
       },
       test("take") { () =>
         assertEqual(
           Stream.range(1, 5).take(2).toList,
-          ???
+          List(1, 2)
         )
       },
       test("flatMap") { () =>
         assertEqual(
           Stream(1, 2, 3).flatMap(i => Stream(i, -i)).toList,
-          ???
+          List(1, -1, 2, -2, 3, -3)
         )
       },
       test(">>") { () =>
         assertEqual(
           // Alias for `flatMap(_ => s2)`
           (Stream("ignore", "me") >> Stream("42")).toList,
-          ???
+          List("42", "42")
         )
       },
       test("eval") { () =>
         assertEqual(
           Stream.eval(IO(42)).compile.toList.unsafeRunSync(),
-          ???
+          List(42)
         )
       },
       test("eval + effect") { () =>
@@ -80,7 +81,7 @@ object Level1Tests {
         combine(
           assertEqual(
             s1.compile.toList.unsafeRunSync(),
-            ???
+            List("42")
           ),
           assert(cache.contains("new value"))
         )
@@ -96,7 +97,7 @@ object Level1Tests {
         combine(
           assertEqual(
             (s1 >> Stream("42")).compile.toList.unsafeRunSync(),
-            ???
+            List("42")
           ),
           assert(cache.contains("new value"))
         )

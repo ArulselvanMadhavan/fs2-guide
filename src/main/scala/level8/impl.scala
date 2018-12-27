@@ -9,7 +9,7 @@ object impl {
     * outputting the final state and the accumulated outputs
     */
   def evalMapAccumulate[F[_], S, O, O2](s1: Stream[F, O])(init: S)(
-    f: (S, O) => F[(S, O2)]): Stream[F, (S, O2)] = {
+      f: (S, O) => F[(S, O2)]): Stream[F, (S, O2)] = {
     def go(s: S, in: Stream[F, O]): Pull[F, (S, O2), Unit] =
       ???
 

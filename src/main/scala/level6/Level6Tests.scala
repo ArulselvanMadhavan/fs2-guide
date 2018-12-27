@@ -38,8 +38,9 @@ object Level6Tests {
       ),
       namedSection("intersperse")(
         test("ones") { () =>
+          val res = intersperse(Stream(1, 2) ++ Stream(3, 4, 5))(1).toList
           assertEqual(
-            intersperse(Stream(1, 2) ++ Stream(3, 4, 5))(1).toList,
+            res,
             List(1, 1, 2, 1, 3, 1, 4, 1, 5)
           )
         },
@@ -55,9 +56,11 @@ object Level6Tests {
       ),
       namedSection("scan")(
         test("running sum") { () =>
+          val res = scan(Stream.range(1, 10))(0)(_ + _).toList
+          val res1 = (1 until 10).toList.scan(0)(_ + _)
           assertEqual(
-            scan(Stream.range(1, 10))(0)(_ + _).toList,
-            (1 until 10).toList.scan(0)(_ + _)
+            res,
+            res1
           )
         },
         test("running factorial") { () =>

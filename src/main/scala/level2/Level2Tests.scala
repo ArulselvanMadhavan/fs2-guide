@@ -25,7 +25,7 @@ object Level2Tests {
         val stream = Stream(1, 2, 3) ++ Stream(throw new Exception("Boom!"))
         assertEqual(
           Try(stream.toList).getOrElse(List(42)),
-          List(???)
+          List(42)
         )
       },
       test("exception in effect") { () =>
@@ -33,7 +33,7 @@ object Level2Tests {
           new Exception("Boom!"))
         assertEqual(
           Try(stream.compile.toList.unsafeRunSync).getOrElse(List(42)),
-          List(???)
+          List(42)
         )
       },
       test("handle exception 1") { () =>
@@ -45,7 +45,7 @@ object Level2Tests {
             .compile
             .toList
             .unsafeRunSync(),
-          List(???)
+          List("Boom!")
         )
       },
       test("handle exception 2") { () =>
@@ -53,7 +53,7 @@ object Level2Tests {
         val stream = Stream("1", "2", "3") ++ Stream(throw new Exception(error))
         assertEqual(
           stream.handleErrorWith(e => Stream(e.getMessage)).toList,
-          List(???)
+          List("1", "2", "3", "Boom!")
         )
       },
       test("handle exception 3") { () =>
@@ -62,7 +62,7 @@ object Level2Tests {
           "3")
         assertEqual(
           stream.handleErrorWith(e => Stream(e.getMessage)).toList,
-          List(???)
+          List("1", "Boom!")
         )
       }
     )
